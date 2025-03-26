@@ -6,6 +6,7 @@ import 'package:alice/ui/common/alice_context_ext.dart';
 import 'package:alice/ui/common/alice_scroll_behavior.dart';
 import 'package:alice/utils/curl.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// Screen which displays call overview data, for example method, server.
 class AliceCallOverviewScreen extends StatelessWidget {
@@ -66,8 +67,11 @@ class AliceCallOverviewScreen extends StatelessWidget {
               value: call.secure.toString(),
             ),
             AliceCallListRow(
-              name: context.i18n(AliceTranslationKey.curl),
+              name: "CURL",
               value: Curl.getCurlCommand(call),
+              onPressed: () {
+                Clipboard.setData(ClipboardData(text: Curl.getCurlCommand(call)));
+              },
             ),
           ],
         ),
