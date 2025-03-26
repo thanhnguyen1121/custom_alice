@@ -1,5 +1,3 @@
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,13 +7,18 @@ class AliceCallListRow extends StatelessWidget {
   final String? value;
   final VoidCallback? onPressed;
 
-  const AliceCallListRow({required this.name, this.value, super.key, this.onPressed,});
+  const AliceCallListRow({
+    required this.name,
+    this.value,
+    super.key,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
-      onPressed: (){
-        onPressed.call();
+      onPressed: () {
+        onPressed?.call();
       },
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
