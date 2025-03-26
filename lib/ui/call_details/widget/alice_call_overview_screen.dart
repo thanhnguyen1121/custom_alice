@@ -7,7 +7,6 @@ import 'package:alice/ui/common/alice_scroll_behavior.dart';
 import 'package:alice/utils/curl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 /// Screen which displays call overview data, for example method, server.
 class AliceCallOverviewScreen extends StatelessWidget {
@@ -72,7 +71,22 @@ class AliceCallOverviewScreen extends StatelessWidget {
               value: Curl.getCurlCommand(call),
               onPressed: () async {
                 await Clipboard.setData(ClipboardData(text: Curl.getCurlCommand(call)));
-                Fluttertoast.showToast(msg: "Copy thanh cong");
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text("CURL command copied to clipboard"),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             ),
           ],
